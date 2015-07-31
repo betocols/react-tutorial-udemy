@@ -1,0 +1,53 @@
+<head>
+  <script src="https://fb.me/react-0.13.3.js"></script>
+  <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class='row'>
+      <div class="col-sm-5 target">
+        
+      </div>
+    </div>
+  </div>
+</body>
+<script type="text/jsx">
+  // Define a class (component)
+  var Badge = React.createClass({
+
+    render: function() {
+          return <button className="btn btn-primary" type="button">
+            {this.props.title} <span className="badge">{this.props.number}</span>
+          </button>
+    }
+  });
+
+  var Thumbnail = React.createClass({
+    render: function() {
+      return <div className="thumbnail">
+        <img src={this.props.imgUrl} />
+        <div className="caption">
+          <h3>{this.props.header}</h3>
+          <p>{this.props.description}</p>
+          <p>
+            <Badge title={this.props.title} number={this.props.number} />
+          </p>
+        </div>
+      </div>
+    }
+  });
+
+  var options = {
+    title: "See tutorials",
+    number: 32,
+    header: 'Learn React',
+    description: 'React is a fantastic new library for making fast, dynamic pages. React is a fantastic new library for making fast, dynamic pages',
+    imgUrl: 'https://www.codementor.io/assets/tutorial_icon/reactjs.png'
+  };
+  // React, render this class
+  var element = React.createElement(Thumbnail, options);
+
+  // React, after rendering this class, place it in the body tag
+  React.render(element, document.querySelector('.target'));
+</script>
