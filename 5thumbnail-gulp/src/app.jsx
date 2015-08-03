@@ -1,3 +1,7 @@
+var React = require('react');
+var ThumbnailList = require('./thumbnail-list'); // This is a file I wrote, I use a different syntax to require this
+//var Gulp = require('gulp'); // Gulp is an NPM module, we use NPM-type syntax
+
 var options = {
 
   thumbnailData: [
@@ -19,5 +23,5 @@ var options = {
 // React, render this class
 var element = React.createElement(ThumbnailList, options);
 
-// React, after rendering this class, place it in the body tag
+// React, after rendering this class, place it in the container tag
 React.render(element, document.querySelector('.container'));
