@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactFire = require('reactfire');
-var FireBase = require('firebase');
+var Firebase = require('firebase');
 var Header = require('./header');
 var List = require('./list');
 var rootUrl = "https://crackling-inferno-5140.firebaseio.com/";
@@ -17,9 +17,9 @@ var App = React.createClass({
   },
   // Every code inside this method will be ran exactly one time, and its whenever this component is mounted to the DOM
   componentWillMount: function() {
-    fb = new Firebase(rootUrl + 'items/');
-    this.bindAsObject(fb, 'items');
-    fb.on('value', this.handleDataLoaded)
+    this.fb = new Firebase(rootUrl + 'items/');
+    this.bindAsObject(this.fb, 'items');
+    this.fb.on('value', this.handleDataLoaded)
     // this.state.items => {} will be an object with the data stored in firebase
   },
   render: function() {
@@ -32,9 +32,32 @@ var App = React.createClass({
         <hr />
         <div className={"content " + (this.state.loaded ? "loaded" : "")}>
           <List items={this.state.items} />
+          {this.deleteButton()}
         </div>
       </div>
     </div>
+  },
+  deleteButton: function() {
+    if(!this.state.loaded) {
+      return null;
+    } else {
+      return <div className="text-center clear-complete">
+        <hr />
+        <button
+          type="button"
+          onClick={this.onDeleteDoneClick}
+          className="btn btn-default">
+            Clear Complete
+          </button>
+        </div>
+    }
+  },
+  onDeleteDoneClick: function() {
+    for(var key in this.state.items) {
+      if(this.state.items[key].done === true) {
+        this.fb.child(key).remove();
+      }
+    }
   },
   handleDataLoaded: function(){
     this.setState({loaded:true});
