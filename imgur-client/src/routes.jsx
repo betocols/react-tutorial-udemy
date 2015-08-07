@@ -5,11 +5,14 @@ var Router = ReactRouter.Router; // The actual router that will be deciding what
 var Route = ReactRouter.Route; //Used to configure the Router
 
 var Main = require('./components/main');
+var Topic = require('./components/topic');
+var ImageDetail = require('./components/image-detail');
 
 module.exports = (
   <Router history={new HashHistory}>
     <Route path="/" component={Main}>
-
+      <Route path="topics/:id" component={Topic} />
+      <Route path="images/:id" component={ImageDetail} />
     </Route>
   </Router>
 )
