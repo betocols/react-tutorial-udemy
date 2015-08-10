@@ -34,3 +34,7 @@ npm install whatwg-fetch --save
 Install reflux:
 
 npm install --save reflux
+
+########################################
+
+npm install --save lodash
